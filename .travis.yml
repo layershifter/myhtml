@@ -52,6 +52,10 @@ matrix:
 
 install: false
 
+before_script:
+- echo "branch:" "$TRAVIS_BRANCH"
+- echo "tag:" "$TRAVIS_TAG"
+
 script:
   - if [ "$TARGET" == "test" ]; then make -j2 && make clean; fi
   - if [ -n "$TRAVIS_TAG" ] && [ -n "$OS" ]; then git clone https://github.com/packpack/packpack.git packpack; fi
@@ -64,6 +68,7 @@ deploy:
   token        : ${PACKAGECLOUD_TOKEN}
   dist         : ${OS}/${DIST}
   package_glob : build/*.{deb,rpm}
-  skip_cleanup : true
-  on           :
-    condition  : -n "${TRAVIS_TAG}"
+  skip_cleanup   : true
+  on             :
+    all_branches : true
+    condition    : -n "${TRAVIS_TAG}"
