@@ -52,6 +52,10 @@ matrix:
 
 install: false
 
+before_script:
+- echo "branch: $TRAVIS_BRANCH"
+- echo "tag: $TRAVIS_TAG"
+
 script:
   - if [ "$TARGET" == "test" ]; then make -j2 && make clean; fi
   - if [ "$TRAVIS_BRANCH" == "master" ] && [ -n "$TRAVIS_TAG" ] && [ -n "$OS" ]; then git clone https://github.com/packpack/packpack.git packpack; fi
