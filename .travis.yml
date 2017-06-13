@@ -9,6 +9,7 @@ compiler:
 
 env:
   matrix:
+    - TARGET=test
     - OS=el DIST=6
     - OS=el DIST=7
     - OS=fedora DIST=24
@@ -40,6 +41,8 @@ matrix:
       compiler: clang
     - env: OS=ubuntu DIST=yakkety
       compiler: clang
+    - env: OS=ubuntu DIST=zesty
+      compiler: clang
     - env: OS=debian DIST=wheezy
       compiler: clang
     - env: OS=debian DIST=jessie
@@ -50,9 +53,9 @@ matrix:
 install: false
 
 script:
-  - make -j2 && make clean
-  - if [ "$TRAVIS_BRANCH" == "master"] && [ -n "$TRAVIS_TAG" ]; then git clone https://github.com/packpack/packpack.git packpack; fi
-  - if [ "$TRAVIS_BRANCH" == "master"] && [ -n "$TRAVIS_TAG" ]; then VERSION=${TRAVIS_TAG:1} packpack/packpack; fi
+  - if [ "$TARGET" == "test" ]; then make -j2 && make clean; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ -n "$TRAVIS_TAG" ] && [ -n "$OS" ]; then git clone https://github.com/packpack/packpack.git packpack; fi
+  - if [ "$TRAVIS_BRANCH" == "master" ] && [ -n "$TRAVIS_TAG" ] && [ -n "$OS" ]; then VERSION=${TRAVIS_TAG:1} packpack/packpack; fi
 
 deploy:
   provider     : packagecloud
