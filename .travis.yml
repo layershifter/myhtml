@@ -18,7 +18,6 @@ env:
     - OS=ubuntu DIST=trusty
     - OS=ubuntu DIST=xenial
     - OS=ubuntu DIST=yakkety
-    - OS=ubuntu DIST=zesty
     - OS=debian DIST=wheezy
     - OS=debian DIST=jessie
     - OS=debian DIST=stretch
@@ -58,12 +57,13 @@ script:
   - if [ -n "$TRAVIS_TAG" ] && [ -n "$OS" ]; then VERSION=${TRAVIS_TAG:1} packpack/packpack; fi
 
 deploy:
-  provider     : packagecloud
-  username     : ${PACKAGECLOUD_USER}
-  repository   : ${PACKAGECLOUD_REPO}
-  token        : ${PACKAGECLOUD_TOKEN}
-  dist         : ${OS}/${DIST}
-  package_glob : build/*.{deb,rpm}
-  skip_cleanup : true
-  on           :
-    condition  : -n "${TRAVIS_TAG}"
+  provider    : packagecloud
+  username    : ${PACKAGECLOUD_USER}
+  repository  : ${PACKAGECLOUD_REPO}
+  token       : ${PACKAGECLOUD_TOKEN}
+  dist        : ${OS}/${DIST}
+  package_glob: build/*.{deb,rpm}
+  skip_cleanup: true
+  on          :
+    all_branches : true
+    condition    : -n "${TRAVIS_TAG}"
