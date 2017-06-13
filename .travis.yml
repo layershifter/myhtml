@@ -53,8 +53,8 @@ matrix:
 install: false
 
 before_script:
-- echo "branch: $TRAVIS_BRANCH"
-- echo "tag: $TRAVIS_TAG"
+- echo "branch:" "$TRAVIS_BRANCH"
+- echo "tag:" "$TRAVIS_TAG"
 
 script:
   - if [ "$TARGET" == "test" ]; then make -j2 && make clean; fi
