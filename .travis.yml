@@ -65,5 +65,4 @@ deploy:
   package_glob : build/*.{deb,rpm}
   skip_cleanup   : true
   on             :
-    all_branches : true
-    condition    : [ -n "$TRAVIS_TAG" ] && [ -n "$OS" ]
+    tags: true
