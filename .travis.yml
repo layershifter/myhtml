@@ -57,13 +57,13 @@ script:
   - if [ -n "$TRAVIS_TAG" ] && [ -n "$OS" ]; then VERSION=${TRAVIS_TAG:1} packpack/packpack; fi
 
 deploy:
-  provider    : packagecloud
-  username    : ${PACKAGECLOUD_USER}
-  repository  : ${PACKAGECLOUD_REPO}
-  token       : ${PACKAGECLOUD_TOKEN}
-  dist        : ${OS}/${DIST}
-  package_glob: build/*.{deb,rpm}
-  skip_cleanup: true
-  on          :
+  provider     : packagecloud
+  username     : ${PACKAGECLOUD_USER}
+  repository   : ${PACKAGECLOUD_REPO}
+  token        : ${PACKAGECLOUD_TOKEN}
+  dist         : ${OS}/${DIST}
+  package_glob : build/*.{deb,rpm}
+  skip_cleanup   : true
+  on             :
     all_branches : true
-    condition    : -n "${TRAVIS_TAG}"
+    condition    : [ -n "$TRAVIS_TAG" ] && [ -n "$OS" ]
