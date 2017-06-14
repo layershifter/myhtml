@@ -23,14 +23,14 @@ env:
 
 matrix:
   exclude:
-    - compiler: clang
-      env: OS=el
-    - compiler: clang
-      env: OS=fedora
-    - compiler: clang
-      env: OS=ubuntu
-    - compiler: clang
-      env: OS=debian
+    - env: OS=el
+      compiler: clang
+    - env: OS=fedora
+      compiler: clang
+    - env: OS=ubuntu
+      compiler: clang
+    - env: OS=debian
+      compiler: clang
 
 install: false
 
