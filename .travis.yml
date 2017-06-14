@@ -1,11 +1,14 @@
 language: c
+compiler:
+  - clang
+  - gcc
+
 services:
   - docker
 sudo: false
 
 env:
-  - CC=clang TARGET=test
-  - CC=gcc TARGET=test
+  - TARGET=test
   - OS=el DIST=6
   - OS=el DIST=7
   - OS=fedora DIST=24
@@ -17,6 +20,17 @@ env:
   - OS=debian DIST=wheezy
   - OS=debian DIST=jessie
   - OS=debian DIST=stretch
+
+matrix:
+  exclude:
+    - compiler: clang
+      env: OS=el
+    - compiler: clang
+      env: OS=fedora
+    - compiler: clang
+      env: OS=ubuntu
+    - compiler: clang
+      env: OS=debian
 
 install: false
 
