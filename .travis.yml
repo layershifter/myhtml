@@ -24,30 +24,10 @@ env:
 
 matrix:
   exclude:
-    - env: OS=el DIST=6
-      compiler: clang
-    - env: OS=el DIST=7
-      compiler: clang
-    - env: OS=fedora DIST=24
-      compiler: clang
-    - env: OS=fedora DIST=25
-      compiler: clang
-    - env: OS=ubuntu DIST=precise
-      compiler: clang
-    - env: OS=ubuntu DIST=trusty
-      compiler: clang
-    - env: OS=ubuntu DIST=xenial
-      compiler: clang
-    - env: OS=ubuntu DIST=yakkety
-      compiler: clang
-    - env: OS=ubuntu DIST=zesty
-      compiler: clang
-    - env: OS=debian DIST=wheezy
-      compiler: clang
-    - env: OS=debian DIST=jessie
-      compiler: clang
-    - env: OS=debian DIST=stretch
-      compiler: clang
+    - compiler: gcc
+      env: -n "$TRAVIS_TAG"
+    - compiler: clang
+      env: -n "${OS}"
 
 install: false
 
